@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Tourney</string>
+    <string name="add_player">Add Player</string>
+    <string name="choose_tournament">Choose Tournament</string>
+    <string name="name_label">Name:</string>
+    <string name="score_label">Score:</string>
+    <string name="submit">Submit</string>
 </resources>
