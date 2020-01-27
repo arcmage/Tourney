@@ -18,7 +18,8 @@
                     android:layout_height="wrap_content" android:id="@+id/nameLabel" tools:text="@string/name_label"/>
             <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/name"/>
+                    android:layout_height="wrap_content" android:id="@+id/name"
+                    android:inputType="text"/>
         </TableRow>
         <TableRow
                 android:layout_width="match_parent"
@@ -29,7 +30,9 @@
                     android:layout_height="wrap_content" android:id="@+id/scoreLabel"/>
             <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/score"/>
+                    android:layout_height="wrap_content" android:id="@+id/score"
+                    android:inputType="number"
+                    android:digits="0123456789"/>
         </TableRow>
         <TableRow
                 android:layout_width="match_parent"
@@ -39,6 +42,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/submitBT"
                     android:text="@string/submit"/>
+            <Button
+                    android:text="@string/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/cancelBT"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/errorRow">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/error"/>
         </TableRow>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,9 @@ public class Player {
     public Player(String name, int score) {
         this.name = name;
         this.score = score;
+        this.active = true;
+        this.isBuffed = false;
+        this.x = 0;
     }
 
     public Player(String name, int score, boolean active, boolean isBuffed, int x) {

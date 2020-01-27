@@ -18,5 +18,9 @@
                 android:text="@string/choose_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/button2"/>
+        <Button
+                android:text="@string/setup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/button3"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
