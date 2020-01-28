@@ -7,6 +7,9 @@ public class Tournament {
     private String month;
     private List<Player> players;
 
+    public Tournament() {
+    }
+
     public Tournament(int id, String month, List<Player> players) {
         this.id = id;
         this.month = month;
