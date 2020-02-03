@@ -1,26 +1,29 @@
 package com.example.tourney;
 
-public class Player {
+import com.orm.SugarRecord;
+
+public class Player extends SugarRecord {
+    private int id;
     private String name;
     private int score;
     private boolean active;
     private boolean isBuffed;
-    private int x;
+    private int buffsNumber;
 
     public Player(String name, int score) {
         this.name = name;
         this.score = score;
         this.active = true;
         this.isBuffed = false;
-        this.x = 0;
+        this.buffsNumber = 0;
     }
 
-    public Player(String name, int score, boolean active, boolean isBuffed, int x) {
+    public Player(String name, int score, boolean active, boolean isBuffed, int buffsNumber) {
         this.name = name;
         this.score = score;
         this.active = active;
         this.isBuffed = isBuffed;
-        this.x = x;
+        this.buffsNumber = buffsNumber;
     }
 
     public String getName() {
@@ -55,11 +58,11 @@ public class Player {
         isBuffed = buffed;
     }
 
-    public int getX() {
-        return x;
+    public int getBuffsNumber() {
+        return buffsNumber;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setBuffsNumber(int buffsNumber) {
+        this.buffsNumber = buffsNumber;
     }
 }
