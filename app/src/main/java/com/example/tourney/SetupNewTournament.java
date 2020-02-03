@@ -53,6 +53,7 @@ public class SetupNewTournament extends Activity {
             if(! month.getText().toString().equals("") && temp.size() >= 3){
                 tournament.setMonth(month.getText().toString());
                 tournament.setPlayers(temp);
+                tournament.save();
                 Intent intent = new Intent(SetupNewTournament.this, MainActivity.class);
                 startActivity(intent);
             }

@@ -28,18 +28,8 @@ public class AddPlayerActivity extends Activity {
         cancel.setOnClickListener(cancelLS);
     }
 
-    public boolean validate(TextView name, TextView score){
-        //TODO insure input would be in String and int format
-        String nameValue = null;
-        int scoreValue;
-        try{
-            nameValue = name.getText().toString();
-            scoreValue = Integer.parseInt(score.getText().toString());
-        }catch(Exception e){
-            Toast.makeText(getApplicationContext(),"Parsing failed",Toast.LENGTH_SHORT).show();
-        }
-
-        if(nameValue.equals("")){
+    public boolean validate(String name, int score){
+        if(name.equals("")){
             error.setText("Please input a name");
             return false;
         }
@@ -52,8 +42,21 @@ public class AddPlayerActivity extends Activity {
         @Override
         public void onClick(View v) {
             error.setText("");
-            if(validate(name, score)){
+            String nameValue = null;
+            int scoreValue = 0;
+            try{
+                nameValue = name.getText().toString();
+                scoreValue = Integer.parseInt(score.getText().toString());
+            }catch(Exception e){
+                Toast.makeText(getApplicationContext(),"Parsing failed",Toast.LENGTH_SHORT).show();
+            }
+
+            if(validate(nameValue, scoreValue)){
                 //TODO Create and Store Player info
+                Player player = new Player(nameValue, scoreValue);
+                player.save();
+                Toast.makeText(getApplicationContext(), "Player added", Toast.LENGTH_SHORT);
+
                 Intent intent = new Intent(AddPlayerActivity.this, MainActivity.class);
                 startActivity(intent);
             }

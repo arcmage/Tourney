@@ -3,7 +3,6 @@ package com.example.tourney;
 import com.orm.SugarRecord;
 
 public class Player extends SugarRecord {
-    private int id;
     private String name;
     private int score;
     private boolean active;

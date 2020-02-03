@@ -1,27 +1,19 @@
 package com.example.tourney;
 
+import com.orm.SugarRecord;
+
 import java.util.List;
 
-public class Tournament {
-    private int id;
+public class Tournament extends SugarRecord {
     private String month;
     private List<Player> players;
 
     public Tournament() {
     }
 
-    public Tournament(int id, String month, List<Player> players) {
-        this.id = id;
+    public Tournament(String month, List<Player> players) {
         this.month = month;
         this.players = players;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getMonth() {
