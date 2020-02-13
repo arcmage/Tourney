@@ -9,6 +9,9 @@ public class Player extends SugarRecord {
     private boolean isBuffed;
     private int buffsNumber;
 
+    public Player(){
+
+    }
     public Player(String name, int score) {
         this.name = name;
         this.score = score;

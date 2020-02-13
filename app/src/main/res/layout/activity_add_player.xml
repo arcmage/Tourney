@@ -15,8 +15,9 @@
                 android:layout_height="wrap_content" android:id="@+id/nameRow">
             <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/nameLabel" tools:text="@string/name_label"/>
-            <TextView
+                    android:layout_height="wrap_content" android:id="@+id/nameLabel"
+                    android:text="@string/name_label"/>
+            <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/name"
                     android:inputType="text"/>
@@ -28,7 +29,7 @@
                     android:text="@string/score_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/scoreLabel"/>
-            <TextView
+            <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/score"
                     android:inputType="number"

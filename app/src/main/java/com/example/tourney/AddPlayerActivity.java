@@ -2,15 +2,18 @@ package com.example.tourney;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class AddPlayerActivity extends Activity {
-    private TextView name, score, error;
+    private EditText name, score;
+    private TextView error;
     private Button submit, cancel;
 
     @Override
@@ -30,13 +33,42 @@ public class AddPlayerActivity extends Activity {
 
     public boolean validate(String name, int score){
         if(name.equals("")){
-            error.setText("Please input a name");
+            Toast.makeText(getApplicationContext(),"Please enter a name", Toast.LENGTH_LONG).show();
             return false;
         }
         //TODO insure no name duplicates exist
 
         return true;
     }
+
+    public boolean isDuplicate(Player player){
+        boolean condition = false;
+        try {
+            condition = Player.find(
+                    Player.class, "name = ?", player.getName()).size() > 0 ? true : false;
+            Log.w("MyTag","The list size: " + Player.find(
+                    Player.class, "name = ?", player.getName()).size());
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "exception: " + e.getMessage(),Toast.LENGTH_LONG);
+            Log.d("dbError","exception: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
+        }
+        return condition;
+
+        //return  true;
+    }
+
+    public void addPlayer(String nameValue, int scoreValue){
+        Player player = new Player(nameValue, scoreValue);
+        if(! isDuplicate(player)){
+            player.save();
+            Toast.makeText(getApplicationContext(), "Player added", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Player already exist", Toast.LENGTH_LONG).show();
+        }
+    }
+
     // set listeners
     private View.OnClickListener submitLS = new View.OnClickListener() {
         @Override
@@ -52,10 +84,7 @@ public class AddPlayerActivity extends Activity {
             }
 
             if(validate(nameValue, scoreValue)){
-                //TODO Create and Store Player info
-                Player player = new Player(nameValue, scoreValue);
-                player.save();
-                Toast.makeText(getApplicationContext(), "Player added", Toast.LENGTH_SHORT);
+                addPlayer(nameValue, scoreValue);
 
                 Intent intent = new Intent(AddPlayerActivity.this, MainActivity.class);
                 startActivity(intent);

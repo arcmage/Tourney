@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
     private View.OnClickListener chooseTourLS = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, AddPlayerActivity.class);
+            Intent intent = new Intent(MainActivity.this, ChooseTournamentActivity.class);
             startActivity(intent);
         }
     };

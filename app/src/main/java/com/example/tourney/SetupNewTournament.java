@@ -9,7 +9,7 @@ import android.os.Bundle;
 import java.util.List;
 
 public class SetupNewTournament extends Activity {
-    private TextView month;
+    private EditText month;
     private Spinner players;
     private Button submit, cancel, add;
     private LinearLayout participatingRow;
