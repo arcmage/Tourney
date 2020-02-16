@@ -31,12 +31,11 @@ public class AddPlayerActivity extends Activity {
         cancel.setOnClickListener(cancelLS);
     }
 
-    public boolean validate(String name, int score){
+    public boolean validate(String name){
         if(name.equals("")){
             Toast.makeText(getApplicationContext(),"Please enter a name", Toast.LENGTH_LONG).show();
             return false;
         }
-        //TODO insure no name duplicates exist
 
         return true;
     }
@@ -58,14 +57,18 @@ public class AddPlayerActivity extends Activity {
         //return  true;
     }
 
-    public void addPlayer(String nameValue, int scoreValue){
+    public boolean addPlayer(String nameValue, int scoreValue){
         Player player = new Player(nameValue, scoreValue);
         if(! isDuplicate(player)){
             player.save();
             Toast.makeText(getApplicationContext(), "Player added", Toast.LENGTH_LONG).show();
+
+            return true;
         }
         else{
             Toast.makeText(getApplicationContext(), "Player already exist", Toast.LENGTH_LONG).show();
+
+            return false;
         }
     }
 
@@ -83,14 +86,14 @@ public class AddPlayerActivity extends Activity {
                 Toast.makeText(getApplicationContext(),"Parsing failed",Toast.LENGTH_SHORT).show();
             }
 
-            if(validate(nameValue, scoreValue)){
-                addPlayer(nameValue, scoreValue);
-
-                Intent intent = new Intent(AddPlayerActivity.this, MainActivity.class);
-                startActivity(intent);
+            if(validate(nameValue)){
+                if(addPlayer(nameValue, scoreValue)){
+                    Intent intent = new Intent(AddPlayerActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
             else {
-                error.setText("No dice");
+                error.setText("Validation failed");
             }
         }
     };

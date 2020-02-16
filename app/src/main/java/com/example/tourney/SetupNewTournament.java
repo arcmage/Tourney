@@ -2,19 +2,26 @@ package com.example.tourney;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.os.Bundle;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SetupNewTournament extends Activity {
+public class SetupNewTournament extends Activity implements
+    AdapterView.OnItemSelectedListener{
+    //TODO populate playersList from database
+    List<Player> playersList = new ArrayList<>();
+    List<String> names = new ArrayList<>();
+
     private EditText month;
     private Spinner players;
     private Button submit, cancel, add;
     private LinearLayout participatingRow;
     private Tournament tournament;
-    private List<Player> temp;
+    private List<Player> temp = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,15 @@ public class SetupNewTournament extends Activity {
         submit = findViewById(R.id.submit);
         cancel = findViewById(R.id.cancel);
 
+        playersList = Player.listAll(Player.class);
+        for (Player item: playersList) {
+            names.add(item.getName());
+        }
+        players.setOnItemSelectedListener(this);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, names);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        players.setAdapter(aa);
+
         add.setOnClickListener(addPlayerLS);
         submit.setOnClickListener(submitLS);
         cancel.setOnClickListener(cancelLS);
@@ -38,11 +54,17 @@ public class SetupNewTournament extends Activity {
     private View.OnClickListener addPlayerLS = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Player selected = (Player) players.getSelectedItem();
-            temp.add(selected);
+            //TODO query selected players from the database
+            String selected = players.getSelectedItem().toString();
+            //temp.add(selected);
             TextView newPlayer = new TextView(SetupNewTournament.this);
-            newPlayer.setText(selected.getName());
+            newPlayer.setText(selected);
             participatingRow.addView(newPlayer);
+
+            List<Player> player = Player.find(Player.class, "name = ?", selected);
+
+            Log.w("MyTag", player.get(0).getName() + ", " + player.get(0).getScore());
+            temp.add(player.get(0));
         }
     };
 
@@ -71,4 +93,14 @@ public class SetupNewTournament extends Activity {
             startActivity(intent);
         }
     };
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

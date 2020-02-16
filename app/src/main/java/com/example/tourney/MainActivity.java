@@ -24,6 +24,9 @@ public class MainActivity extends Activity {
         button.setOnClickListener(addPlayerLS);
         button2.setOnClickListener(chooseTourLS);
         button3.setOnClickListener(setupTourLS);
+
+        // Delete current records
+        // Player.deleteAll(Player.class);
     }
 
     private View.OnClickListener addPlayerLS = new View.OnClickListener() {
