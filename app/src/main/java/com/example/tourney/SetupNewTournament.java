@@ -12,7 +12,6 @@ import java.util.List;
 
 public class SetupNewTournament extends Activity implements
     AdapterView.OnItemSelectedListener{
-    //TODO populate playersList from database
     List<Player> playersList = new ArrayList<>();
     List<String> names = new ArrayList<>();
 
@@ -76,6 +75,7 @@ public class SetupNewTournament extends Activity implements
                 tournament.setMonth(month.getText().toString());
                 tournament.setPlayers(temp);
                 tournament.save();
+                Log.w("MyTag", "players? " + tournament.getPlayers().toString());
                 Intent intent = new Intent(SetupNewTournament.this, MainActivity.class);
                 startActivity(intent);
             }

@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 
         // Delete current records
         // Player.deleteAll(Player.class);
+        // Tournament.deleteAll(Tournament.class);
     }
 
     private View.OnClickListener addPlayerLS = new View.OnClickListener() {
