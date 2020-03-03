@@ -31,6 +31,7 @@ public class AddPlayerActivity extends Activity {
         cancel.setOnClickListener(cancelLS);
     }
 
+    // TODO add more validation later
     public boolean validate(String name){
         if(name.equals("")){
             Toast.makeText(getApplicationContext(),"Please enter a name", Toast.LENGTH_LONG).show();
@@ -52,13 +53,12 @@ public class AddPlayerActivity extends Activity {
             Log.d("dbError","exception: " + e.getMessage());
             System.out.println("Exception: " + e.getMessage());
         }
-        return condition;
 
-        //return  true;
+        return condition;
     }
 
     public boolean addPlayer(String nameValue, int scoreValue){
-        Player player = new Player(nameValue, scoreValue);
+        Player player = new Player(nameValue, scoreValue, MainActivity.tournament);
         if(! isDuplicate(player)){
             player.save();
             Toast.makeText(getApplicationContext(), "Player added", Toast.LENGTH_LONG).show();

@@ -1,8 +1,13 @@
 package com.example.tourney;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Table;
 
+@Table
 public class Player extends SugarRecord {
+    private Long id;
+    Tournament tournament;
+
     private String name;
     private int score;
     private boolean active;
@@ -12,20 +17,17 @@ public class Player extends SugarRecord {
     public Player(){
 
     }
-    public Player(String name, int score) {
+    public Player(String name, int score, Tournament tournament) {
         this.name = name;
         this.score = score;
         this.active = true;
         this.isBuffed = false;
         this.buffsNumber = 0;
+        this.tournament = Tournament.find(Tournament.class, "month = ?", tournament.getMonth()).get(0);
     }
 
-    public Player(String name, int score, boolean active, boolean isBuffed, int buffsNumber) {
-        this.name = name;
-        this.score = score;
-        this.active = active;
-        this.isBuffed = isBuffed;
-        this.buffsNumber = buffsNumber;
+    public Long getId(){
+        return id;
     }
 
     public String getName() {
@@ -64,7 +66,11 @@ public class Player extends SugarRecord {
         return buffsNumber;
     }
 
-    public void setBuffsNumber(int buffsNumber) {
-        this.buffsNumber = buffsNumber;
+    public void setBuffsNumber(int buffsNumber) { this.buffsNumber = buffsNumber; }
+
+    public void setTournament(String month){
+        Tournament t = Tournament.find(Tournament.class, "month = ?", month).get(0);
+        this.tournament = t;
+        this.save();
     }
 }

@@ -7,11 +7,13 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
     private Button button, button2, button3;
 
+    static Tournament tournament = new Tournament();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,9 @@ public class MainActivity extends Activity {
         // Delete current records
         // Player.deleteAll(Player.class);
         // Tournament.deleteAll(Tournament.class);
+
+        // TODO populate initial db
+        //populateDB();
     }
 
     private View.OnClickListener addPlayerLS = new View.OnClickListener() {
@@ -51,4 +56,17 @@ public class MainActivity extends Activity {
             startActivity(intent);
         }
     };
+
+    private void populateDB(){
+        Tournament t = new Tournament("Jan 2020");
+        t.save();
+        Player p1 = new Player("Gin", 25, t);
+        p1.save();
+        Player p2 = new Player("Devoo", 22, t);
+        p2.save();
+        Player p3 = new Player("Saydoh", 20, t);
+        p3.save();
+        Player p4 = new Player("Kira", 2, t);
+        p4.save();
+    }
 }

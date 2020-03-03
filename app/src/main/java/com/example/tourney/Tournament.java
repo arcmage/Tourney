@@ -1,34 +1,29 @@
 package com.example.tourney;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Table;
 
 import java.util.List;
 
+@Table
 public class Tournament extends SugarRecord {
+    private Long id;
+
     private String month;
-    private List<Player> players;
 
     public Tournament() {
     }
 
-    public Tournament(String month, List<Player> players) {
+    public Tournament(String month) {
         this.month = month;
-        this.players = players;
     }
 
+    public Long getId(){return id;}
     public String getMonth() {
         return month;
     }
-
     public void setMonth(String month) {
         this.month = month;
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
 }

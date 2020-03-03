@@ -35,6 +35,7 @@ public class SetupNewTournament extends Activity implements
         cancel = findViewById(R.id.cancel);
 
         playersList = Player.listAll(Player.class);
+        Log.w("size", "players number record: " + playersList.size());
         for (Player item: playersList) {
             names.add(item.getName());
         }
@@ -73,9 +74,11 @@ public class SetupNewTournament extends Activity implements
             // if not empty and players are 3 or more
             if(! month.getText().toString().equals("") && temp.size() >= 3){
                 tournament.setMonth(month.getText().toString());
-                tournament.setPlayers(temp);
+                for(Player item: temp){
+                    item.setTournament(month.getText().toString());
+                    item.save();
+                }
                 tournament.save();
-                Log.w("MyTag", "players? " + tournament.getPlayers().toString());
                 Intent intent = new Intent(SetupNewTournament.this, MainActivity.class);
                 startActivity(intent);
             }

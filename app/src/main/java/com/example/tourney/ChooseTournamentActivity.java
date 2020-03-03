@@ -41,12 +41,15 @@ public class ChooseTournamentActivity extends FragmentActivity implements
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //TODO players value returned are null, try to join tables
-        List<Tournament> t = Tournament.find(Tournament.class, "month = ?", parent.getItemAtPosition(position).toString());
-        Tournament current = t.get(0);
-        List<Player> particpatingPlayers = current.getPlayers();
-        TextView newView = new TextView(ChooseTournamentActivity.this);
+        // get the tournament
+        List<Tournament> tournament = Tournament.find(Tournament.class, "month = ?",
+                parent.getItemAtPosition(position).toString());
+        Tournament current = tournament.get(0);
+        List<Player> particpatingPlayers = Player.find(Player.class, "tournament = ?",
+                current.getId().toString());
         for(Player item: particpatingPlayers) {
-            newView.setText(item.getName().toString());
+            TextView newView = new TextView(ChooseTournamentActivity.this);
+            newView.setText(item.getName());
             scoresRow.addView(newView);
         }
     }
